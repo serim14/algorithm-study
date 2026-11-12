@@ -1,26 +1,33 @@
-# 변수 선언 및 입력
-k, n = tuple(map(int, input().split()))
-selected_nums = []
+# 1이상 K이하의 정수를 하나 고르는 행위를
+# N번반복하여 나올 수 있는
+# 서로 다른 수열 구하기
 
+K, N = map(int, input().split())
 
-# 선택된 원소들을 출력해줍니다.
-def print_permutation():
-    for num in selected_nums:
-        print(num, end = " ")
+answer = []
+temp = []
+
+def print_answer():
+    for num in answer:
+        print(num, end=" ")
     print()
 
 
-def find_permutations(cnt):
-    # n개를 모두 뽑은 경우 답을 출력해줍니다.
-    if cnt == n:
-        print_permutation()
+# 수를 1개 고르는 함수 정의
+def choose(curr_num):
+    # 종료 조건
+    if curr_num >= N:
+        print_answer()
         return
     
-    # 1부터 k까지의 각 숫자가 뽑혔을 때의 경우를 탐색합니다.
-    for i in range(1, k + 1):
-        selected_nums.append(i)
-        find_permutations(cnt + 1)
-        selected_nums.pop()
+    for i in range(1, K+1):
+        answer.append(i)
+        choose(curr_num+1)
+        answer.pop()
 
 
-find_permutations(0)
+choose(0)
+
+
+
+
